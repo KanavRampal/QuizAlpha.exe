@@ -1,5 +1,6 @@
 package com.example.k.quizmaster;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,13 +8,13 @@ import java.util.List;
  */
 
 public class QuestionClassResponseClass {
-    List<QuestionsClass> QuestionClassResponseClassObject;
+   ArrayList<QuestionsClass> QuestionClassResponseClassObject;
 
-    public List<QuestionsClass> getQuestionClassResponseClassObject() {
+    public ArrayList<QuestionsClass> getQuestionClassResponseClassObject() {
         return QuestionClassResponseClassObject;
     }
 
-    public void setQuestionClassResponseClassObject(List<QuestionsClass> questionClassResponseClassObject) {
+    public void setQuestionClassResponseClassObject(ArrayList<QuestionsClass> questionClassResponseClassObject) {
         QuestionClassResponseClassObject = questionClassResponseClassObject;
     }
 }

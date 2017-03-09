@@ -26,23 +26,26 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.quiz_page);
         sample=new QuestionsClass[1];
+        questionsClassObj=new ArrayList<>();
         sample[0]=new QuestionsClass(1,"it is a question","yes","no","may be","maybe not");
         Retrofit retrofit=new Retrofit.Builder().baseUrl("https://sheetsu.com/apis/").addConverterFactory(GsonConverterFactory.create()).build();
         SheetApi sheetApi=retrofit.create(SheetApi.class);
-        Call<QuestionClassResponseClass>call =sheetApi.getQuestions();
-        call.enqueue(new Callback<QuestionClassResponseClass>() {
+        Call<ArrayList<QuestionsClass>>call =sheetApi.getQuestions();
+        call.enqueue(new Callback<ArrayList<QuestionsClass>>() {
             @Override
-            public void onResponse(Call<QuestionClassResponseClass> call, Response<QuestionClassResponseClass> response) {
-                Toast.makeText(getApplicationContext(),response.body().getQuestionClassResponseClassObject().size(),Toast.LENGTH_SHORT).show();
+            public void onResponse(Call<ArrayList<QuestionsClass>> call, Response<ArrayList<QuestionsClass>> response) {
+                Toast.makeText(getApplicationContext(),"Newtwork Working",Toast.LENGTH_SHORT).show();
+                questionsClassObj.addAll(response.body());
+                Toast.makeText(getApplicationContext(),"Size of objet : "+questionsClassObj.size(),Toast.LENGTH_SHORT).show();
             }
 
             @Override
-            public void onFailure(Call<QuestionClassResponseClass> call, Throwable t) {
-
+            public void onFailure(Call<ArrayList<QuestionsClass>> call, Throwable t) {
+                Toast.makeText(getApplicationContext(),"Network Not Working",Toast.LENGTH_SHORT).show();
             }
         });
         listView= (ListView) findViewById(R.id.listview);
-        CustomAdapter adapter  =new CustomAdapter(this,sample);
+        CustomAdapter adapter  =new CustomAdapter(this,questionsClassObj);
         listView.setAdapter(adapter);
     }
 }

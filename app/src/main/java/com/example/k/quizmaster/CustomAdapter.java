@@ -20,9 +20,9 @@ import java.util.List;
 
 public class CustomAdapter extends ArrayAdapter<QuestionsClass> {
 
-    QuestionsClass[] mData;
+    ArrayList<QuestionsClass> mData;
     Context context;
-    public CustomAdapter(Context context,QuestionsClass[] objects){
+    public CustomAdapter(Context context,ArrayList<QuestionsClass> objects){
         super(context,0,objects);
         mData=objects;
         this.context=context;
@@ -32,7 +32,7 @@ public class CustomAdapter extends ArrayAdapter<QuestionsClass> {
 
     @Override
     public int getCount() {
-        return mData.length;
+        return mData.size();
     }
     @NonNull
     @Override
@@ -41,7 +41,7 @@ public class CustomAdapter extends ArrayAdapter<QuestionsClass> {
         if(v==null){
             v = LayoutInflater.from(this.context).inflate(R.layout.question_page, parent, false);
         }
-        QuestionsClass currentQuestion=mData[position];
+        QuestionsClass currentQuestion=mData.get(position);
         TextView question=(TextView)v.findViewById(R.id.question);
         Button answer1=(Button) v.findViewById(R.id.answer1);
         Button answer2=(Button)v.findViewById(R.id.answer2);
