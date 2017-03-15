@@ -37,6 +37,8 @@ public class MainActivity extends AppCompatActivity {
             public void onResponse(Call<ArrayList<QuestionsClass>> call, Response<ArrayList<QuestionsClass>> response) {
                 questionsClassObj.addAll(response.body());
                 CustomAdapter adapter  =new CustomAdapter(getApplicationContext(),questionsClassObj);
+
+                //gg commit
                 listView.setAdapter(adapter);
             }
 
