@@ -28,6 +28,7 @@ public class CustomAdapter extends ArrayAdapter<QuestionsClass> {
         this.context=context;
     }
 
+    int i=1;
 
 
     @Override
@@ -47,12 +48,12 @@ public class CustomAdapter extends ArrayAdapter<QuestionsClass> {
         Button answer2=(Button)v.findViewById(R.id.answer2);
         Button answer3=(Button) v.findViewById(R.id.answer3);
         Button answer4=(Button)v.findViewById(R.id.answer4);
-        question.setText(currentQuestion.getQuestion());
-        answer1.setText(currentQuestion.getAnswer1());
-        answer2.setText(currentQuestion.getAnswer2());
-        answer3.setText(currentQuestion.getAnswer3());
-        answer4.setText(currentQuestion.getAnswer4());
-
+        question.setText("Q"+i+" "+currentQuestion.getQuestion());
+        answer1.setText("A"+" "+currentQuestion.getAnswer1());
+        answer2.setText("B"+" "+currentQuestion.getAnswer2());
+        answer3.setText("C"+" "+currentQuestion.getAnswer3());
+        answer4.setText("D"+" "+currentQuestion.getAnswer4());
+        i++;
         return v;
     }
 }
