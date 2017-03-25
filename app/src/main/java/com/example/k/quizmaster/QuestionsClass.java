@@ -11,7 +11,7 @@ public  class QuestionsClass {
     String answer2;
     String answer3;
     String answer4;
-    int answer;
+    String answer;
 
     public QuestionsClass(int id,String question,String answer1,String answer2,String answer3,String answer4){
         this.id=id;
@@ -69,11 +69,11 @@ public  class QuestionsClass {
         this.answer4 = answer4;
     }
 
-    public int getAnswer() {
+    public String getAnswer() {
         return answer;
     }
 
-    public void setAnswer(int answer) {
+    public void setAnswer(String answer) {
         this.answer = answer;
     }
 

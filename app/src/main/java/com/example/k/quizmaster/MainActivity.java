@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         mGridView = (GridView)findViewById(R.id.quizGridView);
-        for(int i=1;i<=20;i++){
+        for(int i=1;i<=5;i++){
             quizNumberArrayList.add(i+"");
         }
 

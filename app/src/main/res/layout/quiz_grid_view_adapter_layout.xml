@@ -6,13 +6,14 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_margin="5dp"
-        android:background="@android:color/darker_gray">
+        android:background="#CCFF90">
         <TextView
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:id="@+id/quizNumberTextView"
             android:text="hello"
             android:textSize="25dp"
+            android:textColor="@android:color/white"
             android:textAlignment="center"
             android:gravity="center"/>
     </LinearLayout>
