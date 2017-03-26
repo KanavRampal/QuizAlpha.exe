@@ -26,32 +26,42 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
-//    LAYOUT OF MAIN ACTIVITY CHANGED, I THINK IT WOULD BE BETTER COMMITTED
-
-    GridView mGridView;
-    QuizGridViewAdapter quizGridViewAdapter;
-    ArrayList<String> quizNumberArrayList = new ArrayList<>();
-
+    ListView listView;
+    ArrayList<QuizClass>obj;
+    ArrayList<QuizClass>sample;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        listView=(ListView)findViewById(R.id.listview);
+        obj=new ArrayList<>();
+        sample=new ArrayList<>();
+        QuizClass sampleObj=new QuizClass(1,"QuizName",1);
+        sample.add(0,sampleObj);
+        Retrofit retrofit=new Retrofit.Builder().baseUrl("https://sheetsu.com/apis/").addConverterFactory(GsonConverterFactory.create()).build();
+        SheetApi sheetApi=retrofit.create(SheetApi.class);
+        Call<ArrayList<QuizClass>> call =sheetApi.getQuizes();
+        call.enqueue(new Callback<ArrayList<QuizClass>>() {
+            @Override
+            public void onResponse(Call<ArrayList<QuizClass>> call, Response<ArrayList<QuizClass>> response) {
+                obj.addAll(response.body());
+                QuizAdapter quizAdapter=new QuizAdapter(getApplicationContext(),obj);
+                listView.setAdapter(quizAdapter);
 
-        mGridView = (GridView)findViewById(R.id.quizGridView);
-        for(int i=1;i<=5;i++){
-            quizNumberArrayList.add(i+"");
-        }
+            }
 
-        quizGridViewAdapter = new QuizGridViewAdapter(this, quizNumberArrayList);
-        mGridView.setAdapter(quizGridViewAdapter);
+            @Override
+            public void onFailure(Call<ArrayList<QuizClass>> call, Throwable t) {
+                QuizAdapter quizAdapter=new QuizAdapter(getApplicationContext(),sample);
+                listView.setAdapter(quizAdapter);
+            }
+        });
 
-        mGridView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Intent intent = new Intent();
-                intent.setClass(MainActivity.this, QuestionPageActivity.class);
-                startActivity(intent);
+               Toast.makeText(getApplicationContext(),"GG",Toast.LENGTH_LONG).show();
             }
         });
 

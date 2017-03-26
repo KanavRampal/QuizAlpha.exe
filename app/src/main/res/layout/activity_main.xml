@@ -5,53 +5,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.example.k.quizmaster.MainActivity">
-
-    <LinearLayout
+    tools:context="com.example.k.quizmaster.MainActivity"
+    android:background="@android:color/black">
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
+        android:text="Select Quiz"
+        android:gravity="center"
+        android:textColor="@android:color/white"
+        android:textSize="@android:dimen/app_icon_size"
+        />
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:id="@+id/listview"
         >
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="QUIZZES ATTEMPTED"
-            android:textSize="20dp"
-            android:gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="attempted quizzes will be shown here in RED color"
-            android:textColor="#F44336"
-            android:gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1">
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:text="AVAILABLE QUIZZES"
-            android:textSize="20dp"
-            android:gravity="center"/>
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="4">
-        <GridView
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:numColumns="4"
-            android:id="@+id/quizGridView">
 
-        </GridView>
-    </LinearLayout>
+    </ListView>
 
 </LinearLayout>
