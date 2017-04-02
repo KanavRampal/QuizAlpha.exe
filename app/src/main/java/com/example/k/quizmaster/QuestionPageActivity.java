@@ -30,6 +30,7 @@ public class QuestionPageActivity extends AppCompatActivity {
     TextView mtimerTextView;
     Boolean aBoolean = true;
     ArrayList<String> manswerArrayList = new ArrayList<>();
+    int finalScore = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +41,6 @@ public class QuestionPageActivity extends AppCompatActivity {
         mtimerTextView = (TextView)findViewById(R.id.timerTextView);
         mcancelButton = (Button)findViewById(R.id.cancelButton);
         msubmitButton = (Button)findViewById(R.id.submitButton);
-
 
         sample = new ArrayList<>();
         questionsClassObj = new ArrayList<>();
@@ -64,15 +64,17 @@ public class QuestionPageActivity extends AppCompatActivity {
                 }
 
                 // ADDED TIMER IN QUIZ  COMMITTED
-                new CountDownTimer(60000,1000){
+                new CountDownTimer(10000,1000){
                     public void onTick(long millisUntilFinished) {
                         mtimerTextView.setText("TIME LEFT: " + millisUntilFinished / 1000 + " secs");
                     }
 
                     public void onFinish() {
-                        Toast.makeText(QuestionPageActivity.this, "QUIZ OVER", Toast.LENGTH_LONG).show();
+                        String x = getScores()+"";      // SENDING SCORES TO RESULT ACTIVITY COMMITTED
+//                        Toast.makeText(QuestionPageActivity.this, "QUIZ OVER", Toast.LENGTH_SHORT).show();
                         Intent i=new Intent();
                         i.setClass(QuestionPageActivity.this, ResultActivity.class);
+                        i.putExtra("score",x);
                         startActivity(i);
                         finish();
                     }
@@ -88,8 +90,6 @@ public class QuestionPageActivity extends AppCompatActivity {
             }
 
         });
-
-
 
         msubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -138,7 +138,14 @@ public class QuestionPageActivity extends AppCompatActivity {
                 dialog.create().show();
             }
         });
-
-
     }
+    public int getScores(){
+        for(int i=0;i<Singleton.Singleton().getList().size();i++){
+            if(manswerArrayList.get(i).compareTo(Singleton.Singleton().getList().get(i))==0){
+                finalScore++;
+            }
+        }
+        return finalScore*10;
+    }
+
 }
