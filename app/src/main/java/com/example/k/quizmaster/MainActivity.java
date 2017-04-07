@@ -1,28 +1,16 @@
 package com.example.k.quizmaster;
 
 import android.content.Intent;
-import android.os.CountDownTimer;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.view.menu.ExpandedMenuView;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.GridView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.google.gson.GsonBuilder;
 
 import java.util.ArrayList;
-import java.util.List;
-
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
-import retrofit2.Retrofit;
-import retrofit2.converter.gson.GsonConverterFactory;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -55,5 +43,51 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+    }
+
+    //  MENU CREATED AND COMMITTED
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if(item.getItemId()==R.id.item1){
+            Intent i = new Intent();
+            //  ABOUT US ACTIVITY COMPLETELY CREATED AND COMMITTED
+            i.setClass(MainActivity.this, AboutUsActivity.class);
+            startActivity(i);
+        }else if(item.getItemId()==R.id.item2){
+            Intent i = new Intent (Intent.ACTION_SENDTO);
+            i.setData(Uri.parse("mailto:phiz99@gmail.com"));
+            i.putExtra(Intent.EXTRA_SUBJECT, "subject");
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            }
+        }else if(item.getItemId()==R.id.item3){
+            Intent i = new Intent(Intent.ACTION_DIAL);
+            i.setData(Uri.parse("tel:"+ "7838668869"));
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            }
+        }else if(item.getItemId()==R.id.item4){
+            Intent i = new Intent (Intent.ACTION_SENDTO);
+            i.setData(Uri.parse("mailto:phiz99@gmail.com"));
+            i.putExtra(Intent.EXTRA_SUBJECT, "subject");
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            }
+        }else{
+            Intent i = new Intent (Intent.ACTION_SENDTO);
+            i.setData(Uri.parse("mailto:phiz99@gmail.com"));
+            i.putExtra(Intent.EXTRA_SUBJECT, "subject");
+            if (i.resolveActivity(getPackageManager()) != null) {
+                startActivity(i);
+            }
+        }
+        return true;
     }
 }
