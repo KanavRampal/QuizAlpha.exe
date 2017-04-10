@@ -1,5 +1,6 @@
 package com.example.k.quizmaster;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.CountDownTimer;
@@ -31,6 +32,10 @@ public class QuestionPageActivity extends AppCompatActivity {
     Boolean aBoolean = true;
     ArrayList<String> manswerArrayList = new ArrayList<>();
     int finalScore = 0;
+    ProgressDialog mProgress;
+    CountDownTimer countDownTimer;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +47,9 @@ public class QuestionPageActivity extends AppCompatActivity {
         mcancelButton = (Button)findViewById(R.id.cancelButton);
         msubmitButton = (Button)findViewById(R.id.submitButton);
 
+        mProgress = new ProgressDialog(this);
+        mProgress.setMessage("Loading Questions Hold On ...");
+
         sample = new ArrayList<>();
         questionsClassObj = new ArrayList<>();
         QuestionsClass obj = new QuestionsClass(1,"it is a question","yes","no","may be","maybe not");
@@ -51,6 +59,7 @@ public class QuestionPageActivity extends AppCompatActivity {
         SheetApi sheetApi = retrofit.create(SheetApi.class);
         Call<ArrayList<QuestionsClass>> call = sheetApi.getQuestions();
         call.enqueue(new Callback<ArrayList<QuestionsClass>>() {
+
             @Override
             public void onResponse(Call<ArrayList<QuestionsClass>> call, Response<ArrayList<QuestionsClass>> response) {
 
@@ -64,14 +73,13 @@ public class QuestionPageActivity extends AppCompatActivity {
                 }
 
                 // ADDED TIMER IN QUIZ  COMMITTED
-                new CountDownTimer(10000,1000){
+                countDownTimer = new CountDownTimer(10000,1000){
                     public void onTick(long millisUntilFinished) {
                         mtimerTextView.setText("TIME LEFT: " + millisUntilFinished / 1000 + " secs");
                     }
 
                     public void onFinish() {
                         String x = getScores()+"";      // SENDING SCORES TO RESULT ACTIVITY COMMITTED
-//                        Toast.makeText(QuestionPageActivity.this, "QUIZ OVER", Toast.LENGTH_SHORT).show();
                         Intent i=new Intent();
                         i.setClass(QuestionPageActivity.this, ResultActivity.class);
                         i.putExtra("score",x);
@@ -79,7 +87,6 @@ public class QuestionPageActivity extends AppCompatActivity {
                         finish();
                     }
                 }.start();
-
             }
 
             @Override
@@ -100,8 +107,11 @@ public class QuestionPageActivity extends AppCompatActivity {
                 dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        countDownTimer.cancel();
+                        String x = getScores()+"";      // SENDING SCORES TO RESULT ACTIVITY COMMITTED
                         Intent i=new Intent();
                         i.setClass(QuestionPageActivity.this, ResultActivity.class);
+                        i.putExtra("score",x);
                         startActivity(i);
                         finish();
                     }
@@ -139,6 +149,9 @@ public class QuestionPageActivity extends AppCompatActivity {
             }
         });
     }
+
+
+
     public int getScores(){
         for(int i=0;i<Singleton.Singleton().getList().size();i++){
             if(manswerArrayList.get(i).compareTo(Singleton.Singleton().getList().get(i))==0){

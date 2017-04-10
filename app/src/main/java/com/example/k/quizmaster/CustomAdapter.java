@@ -40,10 +40,10 @@ public class CustomAdapter extends ArrayAdapter<QuestionsClass> {
     @NonNull
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View v=convertView;
-        if(v==null){
-            v = LayoutInflater.from(this.context).inflate(R.layout.question_page, parent, false);
-        }
+//        View v=convertView;   NOW THIS IS WORKING FINE AND SCORING IS WORKING PERFECTLY COMMITTED
+//        if(v==null){
+          View  v = LayoutInflater.from(this.context).inflate(R.layout.question_page, parent, false);
+//        }
         QuestionsClass currentQuestion=mData.get(position);
         TextView question=(TextView)v.findViewById(R.id.question);
         final Button answer1=(Button) v.findViewById(R.id.answer1);
@@ -98,4 +98,5 @@ public class CustomAdapter extends ArrayAdapter<QuestionsClass> {
 //        i++;
         return v;
     }
+
 }
