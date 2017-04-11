@@ -34,6 +34,7 @@ public class QuestionPageActivity extends AppCompatActivity {
     int finalScore = 0;
     ProgressDialog mProgress;
     CountDownTimer countDownTimer;
+    String user_name = "", con_tact = "", col_lege = "";
 
 
 
@@ -47,8 +48,9 @@ public class QuestionPageActivity extends AppCompatActivity {
         mcancelButton = (Button)findViewById(R.id.cancelButton);
         msubmitButton = (Button)findViewById(R.id.submitButton);
 
-        mProgress = new ProgressDialog(this);
-        mProgress.setMessage("Loading Questions Hold On ...");
+        user_name = getIntent().getStringExtra("userName");
+        con_tact = getIntent().getStringExtra("contact");
+        col_lege = getIntent().getStringExtra("college");
 
         sample = new ArrayList<>();
         questionsClassObj = new ArrayList<>();
@@ -73,7 +75,7 @@ public class QuestionPageActivity extends AppCompatActivity {
                 }
 
                 // ADDED TIMER IN QUIZ  COMMITTED
-                countDownTimer = new CountDownTimer(10000,1000){
+                countDownTimer = new CountDownTimer(60000,1000){
                     public void onTick(long millisUntilFinished) {
                         mtimerTextView.setText("TIME LEFT: " + millisUntilFinished / 1000 + " secs");
                     }
@@ -83,6 +85,9 @@ public class QuestionPageActivity extends AppCompatActivity {
                         Intent i=new Intent();
                         i.setClass(QuestionPageActivity.this, ResultActivity.class);
                         i.putExtra("score",x);
+                        i.putExtra("user_name", user_name);
+                        i.putExtra("con_tact", con_tact);
+                        i.putExtra("col_lege", col_lege);
                         startActivity(i);
                         finish();
                     }
@@ -112,6 +117,9 @@ public class QuestionPageActivity extends AppCompatActivity {
                         Intent i=new Intent();
                         i.setClass(QuestionPageActivity.this, ResultActivity.class);
                         i.putExtra("score",x);
+                        i.putExtra("user_name", user_name);
+                        i.putExtra("con_tact", con_tact);
+                        i.putExtra("col_lege", col_lege);
                         startActivity(i);
                         finish();
                     }
@@ -135,6 +143,7 @@ public class QuestionPageActivity extends AppCompatActivity {
                 dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        countDownTimer.cancel();
                         finish();
                     }
                 });
@@ -151,6 +160,27 @@ public class QuestionPageActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public void onBackPressed() {
+        AlertDialog.Builder dialog=new AlertDialog.Builder(QuestionPageActivity.this);
+        dialog.setTitle("WARNING");
+        dialog.setMessage("You won't be marked for this quiz, are you sure you want to return?");
+        dialog.setPositiveButton("YES", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                countDownTimer.cancel();
+                finish();
+            }
+        });
+
+        dialog.setNegativeButton("NO", new DialogInterface.OnClickListener(){
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+            }
+        });
+        dialog.create().show();
+    }
 
     public int getScores(){
         for(int i=0;i<Singleton.Singleton().getList().size();i++){
