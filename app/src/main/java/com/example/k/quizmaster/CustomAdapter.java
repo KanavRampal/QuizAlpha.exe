@@ -28,9 +28,13 @@ public class CustomAdapter extends ArrayAdapter<QuestionsClass> {
         super(context,0,objects);
         mData=objects;
         this.context=context;
+//        for(int i=0;i<10;i++){
+//            manswerArrayListCheck.add("");
+//        }
     }
 
 //    int i=1;
+
 
 
     @Override

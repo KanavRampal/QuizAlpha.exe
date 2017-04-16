@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "441344137443",
+    "project_id": "quiz-app-5a82b"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:441344137443:android:a98d576bdfe8952b",
+        "android_client_info": {
+          "package_name": "com.example.k.quizmaster"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "441344137443-m1013809ror46upr0clh4e0gem6od2n8.apps.googleusercontent.com",
+          "client_type": 3
+        },
+        {
+          "client_id": "441344137443-kmq8el14su15rk13navjgivk54ccef3k.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.k.quizmaster",
+            "certificate_hash": "ef18d141f70fe939588eb278c791f911c2ab285f"
+          }
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBhQ7A-A3y1QaxcBLvnb9N8JSR2d6xqkmo"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 1
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

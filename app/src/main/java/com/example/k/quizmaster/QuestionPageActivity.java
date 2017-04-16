@@ -27,7 +27,7 @@ public class QuestionPageActivity extends AppCompatActivity {
     ListView listView;
     ArrayList<QuestionsClass> questionsClassObj;
     ArrayList<QuestionsClass> sample;
-    Button button,mcancelButton,msubmitButton;
+    Button mcancelButton,msubmitButton;
     TextView mtimerTextView;
     Boolean aBoolean = true;
     ArrayList<String> manswerArrayList = new ArrayList<>();
@@ -43,10 +43,15 @@ public class QuestionPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_question_page);
 
+//        setAnswerArrayList(manswerArrayList);
+
         listView = (ListView)findViewById(R.id.listview);
         mtimerTextView = (TextView)findViewById(R.id.timerTextView);
         mcancelButton = (Button)findViewById(R.id.cancelButton);
+        mcancelButton.setEnabled(false);
         msubmitButton = (Button)findViewById(R.id.submitButton);
+        msubmitButton.setEnabled(false);
+
 
         user_name = getIntent().getStringExtra("userName");
         con_tact = getIntent().getStringExtra("contact");
@@ -71,9 +76,10 @@ public class QuestionPageActivity extends AppCompatActivity {
                 listView.setAdapter(adapter);
 
                 for(int i=0;i<questionsClassObj.size();i++){
-                    manswerArrayList.add(questionsClassObj.get(i).answer);
+                    manswerArrayList.add(i, questionsClassObj.get(i).answer);
                 }
-
+                msubmitButton.setEnabled(true);
+                mcancelButton.setEnabled(true);
                 // ADDED TIMER IN QUIZ  COMMITTED
                 countDownTimer = new CountDownTimer(60000,1000){
                     public void onTick(long millisUntilFinished) {
@@ -190,5 +196,11 @@ public class QuestionPageActivity extends AppCompatActivity {
         }
         return finalScore*10;
     }
+
+//    public void setAnswerArrayList(ArrayList<String> answerArrayList){
+//        for(int i=0;i<10;i++){
+//            answerArrayList.add(i,"");
+//        }
+//    }
 
 }

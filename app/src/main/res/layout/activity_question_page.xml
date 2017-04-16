@@ -120,6 +120,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:text="Cancel"
+                    android:background="@drawable/round_button"
                     android:id="@+id/cancelButton"/>
 
             </FrameLayout>
@@ -140,6 +141,7 @@
                     android:gravity="center"
                     android:layout_gravity="center"
                     android:text="SUBMIT"
+                    android:background="@drawable/round_button"
                     android:id="@+id/submitButton"/>
 
 
